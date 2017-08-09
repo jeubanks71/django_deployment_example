@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    </head>
+    <body>
+        <div class="container">
+            <nav class="navbar navbar-light navbar-toggleable-sm navbar-static-top">
+                <a class="navbar-brand" href="{% url 'index' %}">Home</a>
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'basicApp:register' %}">Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'admin:index' %}">Admin</a></li>
+
+                    {% if user.is_authenticated %}
+                        <li class='nav-item'><a class='nav-link' href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                        <li class='nav-item'><a class='nav-link' href="{% url  'basicApp:user_login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container">
+            {% block body_block %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
